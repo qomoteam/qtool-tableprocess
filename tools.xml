@@ -1,0 +1,49 @@
+<tools>
+	<tool id="join" name="Join" category="Table process" contributors='Qomo team'>
+		<command>#{HADOOP_BIN} jar tableprocess-0.0.1-SNAPSHOT-jar-with-dependencies.jar cbb.qomo.tools.tableprocess.JoinTool -libjars #{QOMO_COMMON} #{input1} #{column1} #{input2} #{column2} #{output}</command>
+		<params>
+			<input name="input1" label="Input1" format="csv" />
+			<input name="input2" label="Input2" format="csv" />
+			<string name="column1" label="Column of input1" />
+			<string name="column2" label="Column of input2" />
+			<output name="output" label="Output" format="csv" />
+		</params>
+	</tool>
+
+	<tool id="transline" name="Line transformation" category="Table process" contributors='Qomo team'>
+		<command>#{HADOOP_BIN} jar tableprocess-0.0.1-SNAPSHOT-jar-with-dependencies.jar cbb.qomo.tools.tableprocess.TranslateLineTool -libjars #{QOMO_COMMON} #{input} #{output} #{expr}</command>
+		<params>
+			<input name="input" label="Input" format="csv" />
+			<string name="expr" label="Expression" />
+			<output name="output" label="Output" format="csv" />
+		</params>
+	</tool>
+
+	<tool id="filterline" name="Line filter" group="Table process">
+		<command>#{HADOOP_BIN} jar tableprocess-0.0.1-SNAPSHOT-jar-with-dependencies.jar cbb.qomo.tools.tableprocess.FilterLineTool -libjars #{QOMO_COMMON} #{input} #{output} #{expr}</command>
+		<params>
+			<input name="input" label="Input" format="csv" />
+			<string name="expr" label="Expression" />
+			<output name="output" label="Output" format="csv" />
+		</params>
+	</tool>
+
+	<tool id="sortByColumn" title="Sort by column" group="Table process">
+		<command>#{HADOOP_BIN} jar tableprocess-0.0.1-SNAPSHOT-jar-with-dependencies.jar cbb.qomo.tools.tableprocess.SortByColumnTool -libjars #{QOMO_COMMON} #{input} #{output} #{column} #{type} #{order} #{tmp}</command>
+		<params>
+			<input name="input" label="Input" format="csv" />
+			<int name="column" label="Sort by column" value="1"/>
+			<select name="type" label="as">
+				<option label="number" value="number" selected="false" />
+				<option label="string" value="string" selected="true" />
+			</select>
+			<select name="order" label="in">
+				<option label="ascending order" value="asc" selected="true" />
+				<option label="descending order" value="des" selected="false" />
+			</select>
+			<output name="output" label="Output" format="csv" />
+			<temp name="tmp"/>
+		</params>
+	</tool>
+
+</tools>

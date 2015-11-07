@@ -20,7 +20,7 @@
 	</tool>
 
 	<tool id="filterline" name="Line filter" category="Table process" contributors='Qomo team'>
-		<command>#{HADOOP_BIN} jar tableprocess-0.0.1-SNAPSHOT-jar-with-dependencies.jar cbb.qomo.tools.tableprocess.FilterLineTool -libjars #{QOMO_COMMON} #{input} #{output} #{expr}</command>
+		<command>#{HADOOP_BIN} jar tableprocess-0.0.1-SNAPSHOT-jar-with-dependencies.jar cbb.qomo.tools.tableprocess.FilterLineTool -libjars #{QOMO_COMMON} #{input} #{output} "#{expr}"</command>
 		<params>
 			<input name="input" label="Input" format="csv" />
 			<string name="expr" label="Expression" />

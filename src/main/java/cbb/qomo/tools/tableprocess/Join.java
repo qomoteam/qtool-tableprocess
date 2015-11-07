@@ -4,6 +4,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.IntWritable;
@@ -51,9 +52,14 @@ public class Join {
 		private int[] idx;
 
 		private int getFileId(String file) {
+            if (file.contains("://")) {
+                file = file.split("://")[1];
+            }
 			for (int i = 0; i < 2; i++) {
-				if (file.startsWith(files[i]))
-					return i;
+                if (file.startsWith(files[i])) {
+                    return i;
+                }
+
 			}
 			return -1;
 		}
@@ -78,7 +84,7 @@ public class Join {
 			valueOut.text = valueIn;
 			int id = getFileId(((FileSplit) context.getInputSplit()).getPath()
 					.toString());
-			valueOut.file = new IntWritable(id);
+            valueOut.file = new IntWritable(id);
 			String keyOut = CSVUtil.split(valueIn.toString())[idx[id]];
 			context.write(new Text(keyOut), valueOut);
 		}

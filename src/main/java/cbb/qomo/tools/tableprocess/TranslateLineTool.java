@@ -3,6 +3,7 @@ package cbb.qomo.tools.tableprocess;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
@@ -16,11 +17,10 @@ import org.apache.hadoop.util.ToolRunner;
 public class TranslateLineTool extends Configured implements Tool {
 
 	public static void main(String[] args) throws Exception {
-		for (int i = 0; i < args.length; i++) {
-			System.out.println(i + " : " + args[i]);
-		}
 		Configuration conf = new Configuration();
-		int res = ToolRunner.run(conf, new TranslateLineTool(), args);
+    String[] remainArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
+
+		int res = ToolRunner.run(conf, new TranslateLineTool(), remainArgs);
 		System.exit(res);
 	}
 
